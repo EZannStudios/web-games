@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EzannStudios — HTML5 Arcade Games</title>
+  <meta name="description" content="EzannStudios is an independent studio making fast, fun HTML5 arcade and casual games for the web — instant to play in any browser, on any device." />
+  <!-- Favicon: black square with white "EZ" (inline SVG, no external request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ctext x='16' y='17' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EEZ%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --bg-soft: #12122099;
+      --card: #14142400;
+      --line: #2a2a45;
+      --text: #eaeaf5;
+      --muted: #9a9ac0;
+      --neon-a: #ff3db0;
+      --neon-b: #00e0ff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #1b0f2e 0%, transparent 60%),
+        radial-gradient(1000px 500px at -10% 10%, #08202b 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+
+    /* Header */
+    header { padding: 70px 0 40px; text-align: center; }
+    .logo {
+      display: block;
+      margin: 0 auto;
+      width: min(460px, 100%);
+      height: auto;
+      /* Fade all four edges into the page (horizontal + vertical gradients,
+         intersected) so the banner has no hard box edge on any side. */
+      --logo-fade:
+        linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+      -webkit-mask-image: var(--logo-fade);
+      -webkit-mask-composite: source-in;
+      mask-image: var(--logo-fade);
+      mask-composite: intersect;
+    }
+    .tagline {
+      margin: 12px auto 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(15px, 2.4vw, 18px);
+    }
+
+    /* Sections */
+    section { padding: 34px 0; }
+    h2 {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--neon-b);
+      margin: 0 0 18px;
+    }
+    .about p { max-width: 720px; color: #cfcfe6; margin: 0; font-size: 17px; }
+
+    /* Games grid */
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #16162a, #0e0e1c);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #46466f;
+      box-shadow: 0 14px 40px -18px var(--neon-a);
+    }
+    .thumb {
+      width: 100%;
+      aspect-ratio: 136 / 85; /* matches the 1360x850 cover art -> full image, no crop */
+      overflow: hidden;
+      background: #0e0e1c;
+      border-bottom: 1px solid var(--line);
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 18px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 { margin: 0 0 6px; font-size: 20px; }
+    .card-body p { margin: 0 0 18px; color: var(--muted); font-size: 15px; flex: 1; }
+    .play {
+      align-self: flex-start;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0a0a14;
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: filter .15s ease;
+    }
+    .play:hover { filter: brightness(1.12); }
+
+    /* Contact */
+    .contact a { color: var(--neon-b); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding: 26px 0 50px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="logo" src="assets/logo.png" alt="EzannStudios" width="900" height="240" />
+      <p class="tagline">An independent studio making fast, fun HTML5 arcade games for the web — instant to play in any browser, on any device.</p>
+    </header>
+
+    <main>
+      <section class="about">
+        <h2>About</h2>
+        <p>EzannStudios is an independent game studio focused on lightweight HTML5 arcade and casual games. We build tight, one-more-try experiences — easy to pick up, hard to put down — with clean visuals, responsive one-touch controls, and instant browser play across desktop and mobile. New titles are released regularly across web gaming portals.</p>
+      </section>
+
+      <section>
+        <h2>Games</h2>
+        <div class="games">
+          <article class="card">
+            <div class="thumb"><img src="assets/magnetic-neon.jpg" alt="Magnetic Neon cover art" width="1360" height="850" loading="lazy" /></div>
+            <div class="card-body">
+              <h3>Magnetic Neon</h3>
+              <p>An endless synthwave runner — flip your magnetic charge to weave through a neon gauntlet of hazards.</p>
+              <a class="play" href="https://www.gamepix.com/play/magnetic-neon" target="_blank" rel="noopener">Play on GamePix →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="assets/cutback.jpg" alt="Cutback cover art" width="1360" height="850" loading="lazy" /></div>
+            <div class="card-body">
+              <h3>Cutback</h3>
+              <p>A stack-and-balance challenge — swipe to slice the top block clean and keep your tower from toppling.</p>
+              <a class="play" href="https://www.gamepix.com/play/cutback" target="_blank" rel="noopener">Play on GamePix →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="assets/orbit-dodge.jpg" alt="Orbit Dodge cover art" width="1360" height="850" loading="lazy" /></div>
+            <div class="card-body">
+              <h3>Orbit Dodge</h3>
+              <p>A one-touch orbit dodger — time your release to slingshot the gap and thread past everything in your path.</p>
+              <a class="play" href="https://www.gamepix.com/play/orbit-dodge" target="_blank" rel="noopener">Play on GamePix →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Business &amp; publishing enquiries: <a href="mailto:ezannstudios@gmail.com">ezannstudios@gmail.com</a></p>
+      </section>
+    </main>
+
+    <footer>
+      &copy; <span id="year">2026</span> EzannStudios. All games and trademarks are the property of their respective owners.
+    </footer>
+  </div>
+
+  <script>
+    // Keep the footer year current (the only script on the page — no ads, no trackers).
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
