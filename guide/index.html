@@ -5,6 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The AI Game Guide for Playgama: Sandbox to Catalog — EzannStudios</title>
   <meta name="description" content="Ship AI-made HTML5 games to Playgama with Claude Code: the real route from sandbox to main catalog, with prompts, data and a ready-made agent.">
+  <link rel="canonical" href="https://ezannstudios.github.io/web-games/guide/">
+
+  <!-- Share previews (X, Discord, LinkedIn, Facebook) -->
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="EzannStudios">
+  <meta property="og:title" content="The AI Game Guide for Playgama: Sandbox to Catalog">
+  <meta property="og:description" content="Ship AI-made HTML5 games to Playgama with Claude Code: the real route from sandbox to main catalog, with prompts, data and a ready-made agent.">
+  <meta property="og:url" content="https://ezannstudios.github.io/web-games/guide/">
+  <meta property="og:image" content="https://ezannstudios.github.io/web-games/guide/assets/og-guide.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The AI Game Guide for Playgama: Sandbox to Catalog, PDF cover and pages">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data: the guide as a product, its author, and the sandbox Q&A shown on the page -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "name": "The AI Game Guide for Playgama: Sandbox to Catalog",
+        "description": "A 59-page PDF guide and a Claude Code agent skill for publishing AI-made HTML5 games through the Playgama MCP sandbox into Playgama's main catalog, with real prompts and data from two approved games.",
+        "image": "https://ezannstudios.github.io/web-games/guide/assets/og-guide.jpg",
+        "url": "https://ezannstudios.github.io/web-games/guide/",
+        "brand": { "@type": "Organization", "name": "EzannStudios" },
+        "offers": {
+          "@type": "Offer",
+          "price": "14.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ezannstudios.github.io/web-games/guide/#buy"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is the Playgama AI sandbox?",
+            "acceptedAnswer": { "@type": "Answer", "text": "AI-made games on Playgama have their own route. You publish them through the Playgama MCP, from an AI coding agent such as Claude Code, into a public sandbox page. Real players find them there, and Playgama uses that performance data to decide which games can go to the main catalog." } },
+          { "@type": "Question", "name": "Can I submit an AI-made game straight to the Playgama catalog?",
+            "acceptedAnswer": { "@type": "Answer", "text": "In my experience, no. My first AI-made game, Cutback, was submitted through the normal console form and rejected with a note that AI games go through the MCP sandbox. Taken through the sandbox later, the same game was approved." } },
+          { "@type": "Question", "name": "How do I publish a game to the Playgama sandbox?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Connect the Playgama MCP to your AI coding agent. The game needs the Playgama Bridge SDK 2.2.0 or newer, a zip archive with index.html at its root, three covers (landscape, portrait, square) and a complete form. The agent creates the game, uploads the build and covers, fills in the form and publishes it to the sandbox." } },
+          { "@type": "Question", "name": "What does a sandbox game need to reach the Playgama main catalog?",
+            "acceptedAnswer": { "@type": "Answer", "text": "As of October 2026, the gate is 100 plays and an average play time of 5 minutes. After that, the build is certified in Playgama's QA Tool and submitted to moderation. Magnetic Neon was approved 5 days after submission; Cutback went live about 7 hours after it was resubmitted." } },
+          { "@type": "Question", "name": "How do I get the first players for a Playgama sandbox game?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Playgama offers free traffic bonuses for sharing your sandbox game (three per organization) and for referrals, plus paid traffic in the developer console. On 29 October 2026 the paid plans were about 50 gameplays for $10, 150 for $25 and 400 for $50." } },
+          { "@type": "Question", "name": "How do I update a game that is already in the Playgama catalog?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Once a game is live in the catalog, new builds can be sent as catalog updates through the MCP without going through moderation again. Magnetic Neon's first update went live in about 5 seconds." } }
+        ]
+      }
+    ]
+  }
+  </script>
   <!-- Favicon: black square with white "EZ" (inline SVG, no external request) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ctext x='16' y='17' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EEZ%3C/text%3E%3C/svg%3E">
   <style>
@@ -263,7 +317,7 @@
     <header>
       <a href="https://ezannstudios.github.io/web-games/"><img class="logo" src="https://ezannstudios.github.io/web-games/assets/logo.png" alt="EzannStudios" width="900" height="240"></a>
       <h1>The AI Game Guide for Playgama: <span class="grad">Sandbox to Catalog</span></h1>
-      <p class="tagline">My first AI-made game was rejected the day after I submitted it. This is the route that got the next two into Playgama's main catalog, step by step, with the real prompts, numbers and mistakes.</p>
+      <p class="tagline">My first AI-made game was rejected the day after I submitted it. This is the route that got it, and my next game, into Playgama's main catalog, step by step, with the real prompts, numbers and mistakes.</p>
       <div class="cta-row">
         <a class="buy" href="#buy">Get the guide + agent</a>
         <a class="ghost" href="#inside">See what's inside ↓</a>
@@ -324,6 +378,35 @@
             </div>
           </article>
         </div>
+      </section>
+
+      <section id="sandbox">
+        <h2>Playgama's AI sandbox, in short</h2>
+        <p class="lead">The basics, free. These are the questions I had before I started, answered from what happened with my own games. Rules can change, so this reflects October 2026.</p>
+        <details open>
+          <summary>What is the Playgama AI sandbox?</summary>
+          <p>AI-made games on Playgama have their own route. You publish them through the <b>Playgama MCP</b>, from an AI coding agent such as Claude Code, into a public <b>sandbox</b> page. Real players find them there, and Playgama uses that performance data to decide which games can go to the main catalog.</p>
+        </details>
+        <details>
+          <summary>Can I submit an AI-made game straight to the catalog?</summary>
+          <p>In my experience, no. My first AI-made game, Cutback, was submitted through the normal console form and rejected with a note that AI games go through the MCP sandbox. Taken through the sandbox later, the same game was approved.</p>
+        </details>
+        <details>
+          <summary>How do I publish a game to the sandbox?</summary>
+          <p>Connect the Playgama MCP to your AI coding agent. The game needs the <b>Playgama Bridge SDK 2.2.0 or newer</b>, a zip archive with <code>index.html</code> at its root, <b>three covers</b> (landscape, portrait, square) and a complete form. The agent creates the game, uploads the build and covers, fills in the form and publishes it to the sandbox.</p>
+        </details>
+        <details>
+          <summary>What does a sandbox game need to reach the main catalog?</summary>
+          <p>As of October 2026, the gate is <b>100 plays and a 5-minute average play time</b>. After that, the build is certified in Playgama's QA Tool and submitted to moderation. Magnetic Neon was approved 5 days after submission; Cutback went live about 7 hours after it was resubmitted.</p>
+        </details>
+        <details>
+          <summary>How do I get the first players?</summary>
+          <p>Playgama offers free traffic bonuses for sharing your sandbox game (three per organization) and for referrals, plus paid traffic in the developer console. On 29 October 2026 the paid plans were about 50 gameplays for $10, 150 for $25 and 400 for $50.</p>
+        </details>
+        <details>
+          <summary>How do I update a game that's already in the catalog?</summary>
+          <p>Once a game is live in the catalog, new builds can be sent as catalog updates through the MCP without going through moderation again. Magnetic Neon's first update went live in about 5 seconds.</p>
+        </details>
       </section>
 
       <section id="inside">
