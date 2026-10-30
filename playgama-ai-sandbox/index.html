@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Playgama's AI Sandbox Works: From Sandbox to Main Catalog — EzannStudios</title>
+  <meta name="description" content="How Playgama's AI sandbox works in 2026: publishing AI-made games through the MCP, the 100-play / 5-minute gate, and two real games' timelines.">
+  <link rel="canonical" href="https://ezannstudios.github.io/web-games/playgama-ai-sandbox/">
+
+  <!-- Share previews (X, Discord, LinkedIn, Facebook) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EzannStudios">
+  <meta property="og:title" content="How Playgama's AI Sandbox Works: From Sandbox to Main Catalog">
+  <meta property="og:description" content="How Playgama's AI sandbox works in 2026: publishing AI-made games through the MCP, the 100-play / 5-minute gate, and two real games' timelines.">
+  <meta property="og:url" content="https://ezannstudios.github.io/web-games/playgama-ai-sandbox/">
+  <meta property="og:image" content="https://ezannstudios.github.io/web-games/guide/assets/catalog.jpg">
+  <meta property="og:image:alt" content="Magnetic Neon live in the Playgama catalog">
+  <meta property="article:published_time" content="2026-10-30">
+  <meta name="author" content="EZann">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data: the article and its author -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Playgama's AI Sandbox Works: From Sandbox to Main Catalog",
+    "description": "How Playgama's AI sandbox works in 2026: publishing AI-made games through the MCP, the 100-play / 5-minute gate, and two real games' timelines.",
+    "image": "https://ezannstudios.github.io/web-games/guide/assets/catalog.jpg",
+    "datePublished": "2026-10-30",
+    "dateModified": "2026-10-30",
+    "mainEntityOfPage": "https://ezannstudios.github.io/web-games/playgama-ai-sandbox/",
+    "author": { "@type": "Person", "name": "EZann", "url": "https://ezannstudios.github.io/web-games/" },
+    "publisher": { "@type": "Organization", "name": "EzannStudios", "url": "https://ezannstudios.github.io/" }
+  }
+  </script>
+  <!-- Favicon: black square with white "EZ" (inline SVG, no external request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ctext x='16' y='17' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EEZ%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --line: #2a2a45;
+      --text: #eaeaf5;
+      --muted: #9a9ac0;
+      --neon-a: #ff3db0;
+      --neon-b: #00e0ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #1b0f2e 0%, transparent 60%),
+        radial-gradient(1000px 500px at -10% 10%, #08202b 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    header { padding: 44px 0 10px; text-align: center; }
+    .logo {
+      margin: 0 auto 24px;
+      width: min(220px, 70%);
+      /* Same four-edge fade as the studio site */
+      --logo-fade:
+        linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+      -webkit-mask-image: var(--logo-fade);
+      -webkit-mask-composite: source-in;
+      mask-image: var(--logo-fade);
+      mask-composite: intersect;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.15; letter-spacing: -0.4px; }
+    .byline { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
+
+    article { padding: 10px 0 20px; }
+    article p, article li { color: #d6d6ec; font-size: 17px; }
+    h2 { font-size: 24px; margin: 38px 0 10px; line-height: 1.25; }
+    figure { margin: 26px 0; }
+    figure img { border-radius: 12px; border: 1px solid var(--line); }
+    figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; text-align: center; }
+    code { background: #16162a; border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 0.92em; }
+
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 6px; font-size: 15px; }
+    th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    td { color: #d6d6ec; }
+    .table-scroll { overflow-x: auto; }
+
+    .note {
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--neon-b);
+      background: #12122a;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 24px 0;
+    }
+    .note p { margin: 0; font-size: 15px; }
+
+    .cta {
+      margin: 40px 0 10px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background:
+        radial-gradient(500px 160px at 50% 0%, #2a0f3a 0%, transparent 70%),
+        linear-gradient(180deg, #16162a, #0e0e1c);
+      text-align: center;
+    }
+    .cta h2 { margin-top: 0; }
+    .cta p { margin: 0 0 18px; }
+    .buy {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      color: #0a0a14;
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      padding: 12px 24px;
+      border-radius: 999px;
+    }
+    .buy:hover { filter: brightness(1.12); }
+
+    a { color: var(--neon-b); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding: 26px 0 50px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="https://ezannstudios.github.io/web-games/"><img class="logo" src="https://ezannstudios.github.io/web-games/assets/logo.png" alt="EzannStudios" width="900" height="240"></a>
+      <h1>How Playgama's AI sandbox works: from sandbox to main catalog</h1>
+      <p class="byline">By EZann, EzannStudios · 30 October 2026</p>
+    </header>
+
+    <article>
+      <p>If you make HTML5 games with an AI coding agent and want them on <a href="https://playgama.com" target="_blank" rel="noopener">Playgama</a>, there's one thing to know before anything else: AI-made games don't go straight into the main catalog. They go through a <b>sandbox</b> first. I learned that by getting rejected, then took two games through the sandbox into the catalog in October 2026. This is how the route works, with the real numbers.</p>
+
+      <div class="note"><p>This reflects what I saw in September and October 2026. Playgama changes its rules, so check the current ones in the Playgama MCP before you rely on any number here. I'm an independent developer, not affiliated with Playgama.</p></div>
+
+      <h2>What the Playgama AI sandbox is</h2>
+      <p>The sandbox is a public page where an AI-made game lives before it can reach the main catalog. You don't upload to it through the normal developer console form. You publish through the <b>Playgama MCP</b>, a connector your AI coding agent (I use Claude Code) talks to directly. The agent creates the game entry, uploads the build and covers, fills in the form and publishes the sandbox page.</p>
+      <p>Real players find the game there. Playgama watches how they play, and that data decides whether the game can go on to the catalog.</p>
+
+      <h2>Why you can't skip it</h2>
+      <p>My first AI-made game, <b>Cutback</b>, went through the normal console form on 17 September 2026. It was rejected, and the message didn't mention bugs or art. It said, in short, that AI-made games should be published through the MCP sandbox first: that's how they get their first players, and how Playgama picks the strongest ones for the catalog.</p>
+      <p>A rejection there isn't final. A month later I took the same game through the sandbox, and it was approved.</p>
+
+      <h2>What a game needs before it can go to the sandbox</h2>
+      <ul>
+        <li>The <b>Playgama Bridge SDK 2.2.0 or newer</b>, initialized in the game.</li>
+        <li>A <b>zip archive</b> with <code>index.html</code> at its root, not inside a subfolder.</li>
+        <li><b>Three covers</b>: landscape, portrait and square.</li>
+        <li>A <b>complete form</b>: name, description, category, controls and so on.</li>
+      </ul>
+      <p>Playgama checks the build when it's uploaded. Get these wrong and the agent gets a refusal back instead of a sandbox page.</p>
+
+      <h2>The gate: 100 plays and a 5-minute average</h2>
+      <p>According to the Playgama MCP's own documentation as of October 2026, a sandbox game becomes eligible for moderation once it reaches:</p>
+      <ul>
+        <li><b>100 plays</b>, and</li>
+        <li>an <b>average play time of 5 minutes</b>,</li>
+      </ul>
+      <p>counted once a day, so it doesn't flip the minute you cross the line. That applies to a game that was never submitted, and to one that moderation rejected or postponed.</p>
+      <p>100 plays is the easy part. <b>Five minutes on average is the real filter.</b> Every player who leaves after ten seconds pulls the average down, so a game that's fun for 40 seconds won't get through, however polished it is.</p>
+
+      <h2>Getting the first players</h2>
+      <p>You don't have to bring your own audience. Playgama offers:</p>
+      <ul>
+        <li><b>Free traffic bonuses</b> for sharing your sandbox game, three per organization.</li>
+        <li>A <b>referral</b> bonus.</li>
+        <li><b>Paid traffic</b> in the developer console. On 29 October 2026 the plans were about 50 gameplays for $10, 150 for $25 and 400 for $50.</li>
+      </ul>
+
+      <h2>After the gate: certification and moderation</h2>
+      <p>Once the gate is met, the build is certified in Playgama's <b>QA Tool</b>, and then submitted to moderation. Cutback's guided certification took me about 1 hour 40 minutes. How long moderation takes varied a lot between my two games, as the timelines below show.</p>
+
+      <figure>
+        <img src="../guide/assets/catalog.jpg" alt="Magnetic Neon live on playgama.com" width="1280" height="900" loading="lazy">
+        <figcaption>Magnetic Neon in the main Playgama catalog.</figcaption>
+      </figure>
+
+      <h2>Two real timelines</h2>
+      <div class="table-scroll">
+        <table>
+          <tr><th></th><th>Magnetic Neon</th><th>Cutback</th></tr>
+          <tr><td>Before the sandbox</td><td>Built for the sandbox route from the start</td><td>Rejected on 17 Sep via the console form</td></tr>
+          <tr><td>Sandbox live</td><td>18 Sep</td><td>19 Oct</td></tr>
+          <tr><td>Sandbox numbers</td><td>847 plays, 5:24 average</td><td>227 plays, 10:39 average</td></tr>
+          <tr><td>Submitted to moderation</td><td>15 Oct</td><td>23 Oct</td></tr>
+          <tr><td>Live in the catalog</td><td>20 Oct, 5 days later</td><td>23 Oct, about 7 hours later</td></tr>
+        </table>
+      </div>
+      <p>Magnetic Neon took 32 days from its first sandbox build to the catalog, with several builds along the way. Cutback, which went into the Puzzle category, met the gate three days after its sandbox page went live.</p>
+      <p>You can play both: <a href="https://playgama.com/game/magnetic-neon?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Magnetic Neon</a> and <a href="https://playgama.com/game/cutback?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Cutback</a>.</p>
+
+      <h2>Life in the catalog</h2>
+      <p>Once a game is live in the catalog, new builds go out as <b>catalog updates</b> through the MCP, without a new round of moderation. Magnetic Neon's first update, which added a leaderboard, went live in about 5 seconds.</p>
+
+      <h2>In short</h2>
+      <ul>
+        <li>AI-made games go through the Playgama MCP sandbox, not the console form.</li>
+        <li>The gate is 100 plays and a 5-minute average play time (October 2026).</li>
+        <li>Pick a game people play for minutes, not seconds. That decides more than anything else.</li>
+        <li>Then QA Tool certification, moderation, and updates without moderation after that.</li>
+      </ul>
+
+      <div class="cta">
+        <h2>Want the whole route, step by step?</h2>
+        <p>I wrote a guide with the exact prompts, the mistakes and fixes from both games, a pre-submit checklist, and a Claude Code agent that walks you through the same route.</p>
+        <a class="buy" href="../guide/">See the guide →</a>
+      </div>
+    </article>
+
+    <footer>
+      © <span id="year">2026</span> EzannStudios · <a href="https://ezannstudios.github.io/web-games/">Games</a> · <a href="../guide/">The AI Game Guide for Playgama</a><br>
+      Playgama and Claude are trademarks of their respective owners. This article is independent and not endorsed by them.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
