@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Game Guide for Playgama: Sandbox to Catalog — EzannStudios</title>
+  <meta name="description" content="Ship AI-made HTML5 games to Playgama with Claude Code: the real route from sandbox to main catalog, with prompts, data and a ready-made agent.">
+  <!-- Favicon: black square with white "EZ" (inline SVG, no external request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ctext x='16' y='17' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EEZ%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --line: #2a2a45;
+      --text: #eaeaf5;
+      --muted: #9a9ac0;
+      --neon-a: #ff3db0;
+      --neon-b: #00e0ff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #1b0f2e 0%, transparent 60%),
+        radial-gradient(1000px 500px at -10% 10%, #08202b 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Header */
+    header { padding: 56px 0 30px; text-align: center; }
+    .logo {
+      margin: 0 auto 26px;
+      width: min(300px, 80%);
+      /* Same four-edge fade as the studio site */
+      --logo-fade:
+        linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+      -webkit-mask-image: var(--logo-fade);
+      -webkit-mask-composite: source-in;
+      mask-image: var(--logo-fade);
+      mask-composite: intersect;
+    }
+    h1 {
+      margin: 0 auto;
+      max-width: 820px;
+      font-size: clamp(30px, 5.6vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    h1 .grad {
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .tagline {
+      margin: 18px auto 0;
+      max-width: 660px;
+      color: var(--muted);
+      font-size: clamp(16px, 2.4vw, 19px);
+    }
+    .cta-row { margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; }
+    .buy {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      color: #0a0a14;
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      padding: 13px 26px;
+      border-radius: 999px;
+      transition: filter .15s ease, transform .15s ease;
+    }
+    .buy:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .ghost { color: var(--neon-b); text-decoration: none; font-weight: 600; font-size: 15px; }
+    .ghost:hover { text-decoration: underline; }
+    .fine { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+    .hero-shot {
+      margin: 40px auto 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -40px var(--neon-a);
+    }
+    .caption { color: var(--muted); font-size: 13px; text-align: center; margin: 10px 0 0; }
+
+    /* Sections */
+    section { padding: 34px 0; }
+    h2 {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--neon-b);
+      margin: 0 0 18px;
+    }
+    h3 { margin: 0 0 6px; font-size: 20px; }
+    .lead { max-width: 720px; color: #cfcfe6; margin: 0 0 14px; font-size: 17px; }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+      gap: 14px;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      background: linear-gradient(180deg, #16162a, #0e0e1c);
+    }
+    .stat b {
+      display: block;
+      font-size: 30px;
+      line-height: 1.1;
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    /* Cards (same as the games grid) */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 20px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #16162a, #0e0e1c);
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #46466f;
+      box-shadow: 0 14px 40px -18px var(--neon-a);
+    }
+    .thumb { aspect-ratio: 16 / 9; overflow: hidden; background: #0e0e1c; border-bottom: 1px solid var(--line); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .card-body { padding: 18px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-body p { margin: 0 0 16px; color: var(--muted); font-size: 15px; flex: 1; }
+    .tag {
+      align-self: flex-start;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--neon-a);
+      margin-bottom: 8px;
+    }
+    .play {
+      align-self: flex-start;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0a0a14;
+      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
+      padding: 9px 16px;
+      border-radius: 999px;
+    }
+    .play:hover { filter: brightness(1.12); }
+
+    /* Route (chapter list) */
+    .route { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .route li {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #10101e;
+    }
+    .route .n {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--neon-b);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .route b { display: block; }
+    .route span { color: var(--muted); font-size: 15px; }
+
+    /* Two columns: text + image */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .split img { border: 1px solid var(--line); border-radius: 12px; }
+    @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+
+    ul.ticks { list-style: none; padding: 0; margin: 0; }
+    ul.ticks li { padding-left: 26px; position: relative; margin: 0 0 8px; color: #cfcfe6; }
+    ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--neon-b); font-weight: 700; }
+    ul.cross li::before { content: "✕"; color: var(--neon-a); }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #07070f;
+      color: #cfcfe6;
+      font-size: 13.5px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    pre .c { color: var(--muted); }
+
+    /* Pricing box */
+    .box {
+      border: 1px solid #46466f;
+      border-radius: 20px;
+      padding: 30px 26px;
+      text-align: center;
+      background:
+        radial-gradient(600px 200px at 50% 0%, #2a0f3a 0%, transparent 70%),
+        linear-gradient(180deg, #16162a, #0e0e1c);
+    }
+    .price { font-size: 46px; font-weight: 800; margin: 4px 0 2px; }
+    .box ul.ticks { max-width: 440px; margin: 18px auto 24px; text-align: left; }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      background: #10101e;
+    }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { margin: 10px 0 0; color: #cfcfe6; }
+
+    a { color: var(--neon-b); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding: 26px 0 50px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="https://ezannstudios.github.io/web-games/"><img class="logo" src="https://ezannstudios.github.io/web-games/assets/logo.png" alt="EzannStudios" width="900" height="240"></a>
+      <h1>The AI Game Guide for Playgama: <span class="grad">Sandbox to Catalog</span></h1>
+      <p class="tagline">My first AI-made game was rejected the day after I submitted it. This is the route that got the next two into Playgama's main catalog, step by step, with the real prompts, numbers and mistakes.</p>
+      <div class="cta-row">
+        <a class="buy" href="#buy">Get the guide + agent</a>
+        <a class="ghost" href="#inside">See what's inside ↓</a>
+      </div>
+      <p class="fine">PDF guide (~59 pages) + a Claude Code agent skill · by EZann, EzannStudios</p>
+
+      <figure class="hero-shot" style="margin-left:0;margin-right:0">
+        <img src="assets/catalog.jpg" alt="Magnetic Neon live on playgama.com" width="1280" height="900">
+      </figure>
+      <p class="caption">Magnetic Neon, live in the main Playgama catalog, 32 days after its first sandbox build.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>The story</h2>
+        <p class="lead">I built <b>Cutback</b> with Claude Code and submitted it to Playgama like any other web game. A day later it was rejected. The message didn't mention bugs or art. It said that <b>AI-made games have their own route</b>: you publish through the Playgama MCP into a public sandbox, earn your first real players there, and the best performers go to the main catalog.</p>
+        <p class="lead">So my next game, <b>Magnetic Neon</b>, took that route. Then I took the rejected Cutback along it too. Both are in the catalog now. This guide is everything I learned on the way, in the order you'll need it.</p>
+      </section>
+
+      <section>
+        <h2>Real numbers, not promises</h2>
+        <div class="stats">
+          <div class="stat"><b>32 days</b><span>Magnetic Neon: first sandbox build to the main catalog</span></div>
+          <div class="stat"><b>~7 hours</b><span>Cutback: from resubmission to live, after its earlier rejection</span></div>
+          <div class="stat"><b>9 / 9</b><span>Magnetic Neon builds that passed Playgama's build check the first time</span></div>
+          <div class="stat"><b>~5 seconds</b><span>for a catalog update to go live, with no new moderation</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>The games in this guide</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="thumb"><img src="assets/magnetic-neon.jpg" alt="Magnetic Neon cover" width="1360" height="765" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">Main case study</span>
+              <h3>Magnetic Neon</h3>
+              <p>A one-touch synthwave runner. The guide has the real prompts from the afternoon its core loop was found, its sandbox numbers (847 plays, 5:24 average) and the full timeline to the catalog.</p>
+              <a class="play" href="https://playgama.com/game/magnetic-neon?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><img src="assets/cutback.jpg" alt="Cutback cover" width="1360" height="765" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">Rejected, then approved</span>
+              <h3>Cutback</h3>
+              <p>The game that was rejected first. It shows how to come back: sandbox, the 100-play gate, QA certification, and approval about seven hours after resubmitting. Its art was made with SpriteCook.</p>
+              <a class="play" href="https://playgama.com/game/cutback?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><img src="assets/toy-cars.jpg" alt="Toy Cars cover" width="1360" height="765" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">Agent test</span>
+              <h3>Toy Cars</h3>
+              <p>Built to test the included agent: a paper-track racer for 1 or 2 players, taken from a one-paragraph idea to a tested, live sandbox page. Every gap the test found went back into the guide.</p>
+              <a class="play" href="https://playgama.ai/play/fld3x4puzmbm3r" target="_blank" rel="noopener">Play in the sandbox →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="inside">
+        <h2>What's inside</h2>
+        <ol class="route">
+          <li><span class="n">1</span><div><b>Setup</b><span>Claude Code, the Playgama MCP and SpriteCook connected and checked.</span></div></li>
+          <li><span class="n">2</span><div><b>Pick a game that holds 5 minutes</b><span>The design choice that decides whether you ever reach the catalog, plus a prompt that pressure-tests your idea.</span></div></li>
+          <li><span class="n">3</span><div><b>Art with SpriteCook</b><span>Consistent sprites on a small credit budget, and exactly what I generated (and didn't) for both games.</span></div></li>
+          <li><span class="n">4</span><div><b>Build the game with Claude</b><span>Project layout, a rules file for the agent, debug hooks so it can test what it builds, and my real prompts.</span></div></li>
+          <li><span class="n">5</span><div><b>Bridge SDK integration</b><span>Saves, ads, pause and audio, with working code, and the interstitial bug that wasn't a bug.</span></div></li>
+          <li><span class="n">6</span><div><b>Archive, covers, form</b><span>Getting through the build check on the first try. Cover sizes and upload slots.</span></div></li>
+          <li><span class="n">7</span><div><b>Sandbox launch and traffic</b><span>Going public, testing the published link, and the free and paid ways to get your first players.</span></div></li>
+          <li><span class="n">8</span><div><b>Sandbox → catalog</b><span>The 100-play / 5-minute gate, QA Tool certification, moderation, and recovering from a rejection.</span></div></li>
+          <li><span class="n">9</span><div><b>Life in the catalog</b><span>Updates without moderation, reading telemetry, deciding what to work on next.</span></div></li>
+          <li><span class="n">10</span><div><b>Appendix</b><span>Prompt library, refusal-code cheat sheet, a one-page pre-submit checklist and both games' full timelines.</span></div></li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Bonus: the agent</h2>
+        <div class="split">
+          <div>
+            <p class="lead">The whole route also comes as a <b>Claude Code skill</b>. Drop one folder into your project, tell Claude your game idea, and it works through every phase: design check, build, Bridge SDK, tests at six screen sizes, archive, covers, form and sandbox launch.</p>
+            <ul class="ticks">
+              <li>It asks before every change to your Playgama account, and every time before publishing or buying traffic</li>
+              <li>It hands the human steps back to you: playing, certifying, submitting</li>
+              <li>Tested end to end on a new game before release</li>
+            </ul>
+          </div>
+          <pre><span class="c"># copy the skill into your game folder</span>
+my-game/.claude/skills/playgama-publisher/
+
+<span class="c"># then, in Claude Code:</span>
+Use the playgama-publisher skill.
+My game idea: toy cars racing on a circuit
+drawn on paper, 1 player vs a bot or
+2 players on one keyboard.</pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Who it's for</h2>
+        <div class="split">
+          <ul class="ticks">
+            <li>You can describe a game clearly but don't want to write every line yourself</li>
+            <li>You already use Claude Code and want a publishing pipeline that works</li>
+            <li>You have an AI-made game on your drive and nowhere to put it</li>
+            <li>You're willing to play your own game a lot. The agent writes the code; you decide if it's fun</li>
+          </ul>
+          <img src="assets/claude-code.jpg" alt="Claude Code with the Cutback game folder open" width="1360" height="815" loading="lazy">
+        </div>
+      </section>
+
+      <section>
+        <h2>What it isn't</h2>
+        <ul class="ticks cross">
+          <li>Not a guarantee. Playgama decides what goes into its catalog. The guide shows you the route and the bar; your game still has to clear it.</li>
+          <li>Not affiliated with Playgama, Anthropic or SpriteCook. I'm an independent developer who used their tools.</li>
+          <li>Not a coding course. You'll learn what to ask for and what to check, not JavaScript.</li>
+        </ul>
+      </section>
+
+      <section id="buy">
+        <div class="box">
+          <h2 style="margin-bottom:6px">Get the guide</h2>
+          <div class="price">$14.99</div>
+          <p class="fine" style="margin-top:0">One-time purchase · instant download</p>
+          <ul class="ticks">
+            <li>PDF guide, ~59 pages, 10 chapters + appendices</li>
+            <li>The <code>playgama-publisher</code> Claude Code skill, with install instructions</li>
+            <li>Real prompts, numbers and timelines from two catalog games</li>
+            <li>Pre-submit checklist and refusal-code cheat sheet</li>
+          </ul>
+          <!-- Lemon Squeezy overlay checkout (?embed=1 + lemon.js at the end of the page) -->
+          <a class="buy lemonsqueezy-button" href="https://ezannstudios.lemonsqueezy.com/checkout/buy/0b49ed1a-4c15-449c-9aa6-371034dd49c6?embed=1">Buy now</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Questions</h2>
+        <details>
+          <summary>Do I need to know how to code?</summary>
+          <p>No, but you need to be comfortable running Claude Code in a folder and reading what it tells you. The guide gives you the prompts and tells you what to check after each one.</p>
+        </details>
+        <details>
+          <summary>What does it cost to follow?</summary>
+          <p>You need a Claude plan that includes Claude Code and a Playgama developer account. SpriteCook is optional (Magnetic Neon uses no generated images at all). Paid sandbox traffic is optional; the guide covers the free options first.</p>
+        </details>
+        <details>
+          <summary>Will the rules change?</summary>
+          <p>Probably. Every rule in the guide was read from the live Playgama MCP, and where a rule matters, the guide shows you how to ask the MCP for the current version. The agent does that check itself before it starts.</p>
+        </details>
+        <details>
+          <summary>Can I use another AI coding agent?</summary>
+          <p>The guide is written around Claude Code. The skill is a plain Markdown file, so other agents that support MCP can read it, but it's only been tested with Claude Code.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year">2026</span> EzannStudios · <a href="https://ezannstudios.github.io/web-games/">More games</a> · <a href="mailto:ezannstudios@gmail.com">ezannstudios@gmail.com</a><br>
+      Playgama, Claude and SpriteCook are trademarks of their respective owners. This guide is independent and not endorsed by them.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <!-- Lemon Squeezy overlay checkout: opens the checkout on this page for links with class "lemonsqueezy-button" -->
+  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+</body>
+</html>
