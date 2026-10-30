@@ -114,6 +114,17 @@
     }
     .play:hover { filter: brightness(1.12); }
 
+    /* Guide: one wide card, image left, text right (stacks on phones) */
+    .guide-card { display: grid; grid-template-columns: 1fr 1fr; }
+    .guide-card .thumb { aspect-ratio: 4 / 3; border-bottom: 0; border-right: 1px solid var(--line); }
+    .guide-card .card-body { padding: 24px 24px 26px; justify-content: center; }
+    .guide-card .card-body h3 { font-size: 22px; }
+    .guide-card .price { color: var(--text); font-weight: 700; margin: 0 0 14px; font-size: 15px; }
+    @media (max-width: 700px) {
+      .guide-card { grid-template-columns: 1fr; }
+      .guide-card .thumb { border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+
     /* Contact */
     .contact a { color: var(--neon-b); }
 
@@ -138,6 +149,19 @@
       <section class="about">
         <h2>About</h2>
         <p>EzannStudios is an independent game studio focused on lightweight HTML5 arcade and casual games. We build tight, one-more-try experiences — easy to pick up, hard to put down — with clean visuals, responsive one-touch controls, and instant browser play across desktop and mobile. New titles are released regularly across web gaming portals.</p>
+      </section>
+
+      <section>
+        <h2>Guide</h2>
+        <article class="card guide-card">
+          <div class="thumb"><img src="guide/assets/guide-card.jpg" alt="The AI Game Guide for Playgama: Sandbox to Catalog" width="1200" height="900" loading="lazy" /></div>
+          <div class="card-body">
+            <h3>The AI Game Guide for Playgama: Sandbox to Catalog</h3>
+            <p>How Magnetic Neon and Cutback went from Claude Code to Playgama's main catalog, step by step: the real prompts, numbers and mistakes, plus a Claude Code agent that walks you through the same route.</p>
+            <p class="price">PDF guide + agent · $14.99</p>
+            <a class="play" href="guide/">See the guide →</a>
+          </div>
+        </article>
       </section>
 
       <section>
