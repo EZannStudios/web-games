@@ -3,134 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EzannStudios — HTML5 Arcade Games</title>
+  <title>EzannStudios — Free HTML5 Arcade &amp; Casual Games</title>
   <meta name="description" content="EzannStudios is an independent studio making fast, fun HTML5 arcade and casual games for the web — instant to play in any browser, on any device." />
-  <!-- Favicon: black square with white "EZ" (inline SVG, no external request) -->
+  <link rel="canonical" href="https://ezannstudios.github.io/web-games/" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ctext x='16' y='17' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='central'%3EEZ%3C/text%3E%3C/svg%3E" />
-  <style>
-    :root {
-      --bg: #0a0a14;
-      --bg-soft: #12122099;
-      --card: #14142400;
-      --line: #2a2a45;
-      --text: #eaeaf5;
-      --muted: #9a9ac0;
-      --neon-a: #ff3db0;
-      --neon-b: #00e0ff;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(1200px 600px at 80% -10%, #1b0f2e 0%, transparent 60%),
-        radial-gradient(1000px 500px at -10% 10%, #08202b 0%, transparent 55%),
-        var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
-
-    /* Header */
-    header { padding: 70px 0 40px; text-align: center; }
-    .logo {
-      display: block;
-      margin: 0 auto;
-      width: min(460px, 100%);
-      height: auto;
-      /* Fade all four edges into the page (horizontal + vertical gradients,
-         intersected) so the banner has no hard box edge on any side. */
-      --logo-fade:
-        linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
-      -webkit-mask-image: var(--logo-fade);
-      -webkit-mask-composite: source-in;
-      mask-image: var(--logo-fade);
-      mask-composite: intersect;
-    }
-    .tagline {
-      margin: 12px auto 0;
-      max-width: 620px;
-      color: var(--muted);
-      font-size: clamp(15px, 2.4vw, 18px);
-    }
-
-    /* Sections */
-    section { padding: 34px 0; }
-    h2 {
-      font-size: 14px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--neon-b);
-      margin: 0 0 18px;
-    }
-    .about p { max-width: 720px; color: #cfcfe6; margin: 0; font-size: 17px; }
-
-    /* Games grid */
-    .games {
-      display: grid;
-      /* 2 x 2 on wide screens, one column on phones */
-      grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
-      gap: 20px;
-    }
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #16162a, #0e0e1c);
-      display: flex;
-      flex-direction: column;
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #46466f;
-      box-shadow: 0 14px 40px -18px var(--neon-a);
-    }
-    .thumb {
-      width: 100%;
-      aspect-ratio: 136 / 85; /* matches the 1360x850 cover art -> full image, no crop */
-      overflow: hidden;
-      background: #0e0e1c;
-      border-bottom: 1px solid var(--line);
-    }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-body { padding: 18px 18px 20px; flex: 1; display: flex; flex-direction: column; }
-    .card-body h3 { margin: 0 0 6px; font-size: 20px; }
-    .card-body p { margin: 0 0 18px; color: var(--muted); font-size: 15px; flex: 1; }
-    .play {
-      align-self: flex-start;
-      display: inline-block;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-      color: #0a0a14;
-      background: linear-gradient(100deg, var(--neon-a), var(--neon-b));
-      padding: 10px 18px;
-      border-radius: 999px;
-      transition: filter .15s ease;
-    }
-    .play:hover { filter: brightness(1.12); }
-
-    /* Contact */
-    .contact a { color: var(--neon-b); }
-
-    footer {
-      border-top: 1px solid var(--line);
-      margin-top: 30px;
-      padding: 26px 0 50px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-  </style>
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="EzannStudios" />
+  <meta property="og:title" content="EzannStudios — Free HTML5 Arcade &amp; Casual Games" />
+  <meta property="og:description" content="EzannStudios is an independent studio making fast, fun HTML5 arcade and casual games for the web — instant to play in any browser, on any device." />
+  <meta property="og:url" content="https://ezannstudios.github.io/web-games/" />
+  <meta property="og:image" content="https://ezannstudios.github.io/web-games/assets/delivery-drift.jpg" />
+  <meta property="og:image:width" content="1360" />
+  <meta property="og:image:height" content="850" />
+  <meta property="og:image:alt" content="Delivery Drift cover art" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EzannStudios — Free HTML5 Arcade &amp; Casual Games" />
+  <meta name="twitter:description" content="EzannStudios is an independent studio making fast, fun HTML5 arcade and casual games for the web — instant to play in any browser, on any device." />
+  <meta name="twitter:image" content="https://ezannstudios.github.io/web-games/assets/delivery-drift.jpg" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "EzannStudios", "url": "https://ezannstudios.github.io/web-games/", "publisher": {"@type": "Organization", "name": "EzannStudios", "url": "https://ezannstudios.github.io/web-games/"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://ezannstudios.github.io/web-games/delivery-drift/", "name": "Delivery Drift"}, {"@type": "ListItem", "position": 2, "url": "https://ezannstudios.github.io/web-games/liquid-cats/", "name": "Liquid Cats"}, {"@type": "ListItem", "position": 3, "url": "https://ezannstudios.github.io/web-games/moonbrew-apothecary/", "name": "Moonbrew Apothecary"}, {"@type": "ListItem", "position": 4, "url": "https://ezannstudios.github.io/web-games/magnetic-neon/", "name": "Magnetic Neon"}, {"@type": "ListItem", "position": 5, "url": "https://ezannstudios.github.io/web-games/cutback/", "name": "Cutback"}, {"@type": "ListItem", "position": 6, "url": "https://ezannstudios.github.io/web-games/orbit-dodge/", "name": "Orbit Dodge"}]}</script>
 </head>
 <body>
+  <!-- Generated by _build/build_pages.py: edit the GAMES list there, then run it. -->
   <div class="wrap">
-    <header>
-      <img class="logo" src="assets/logo.png" alt="EzannStudios" width="900" height="240" />
+    <header class="home">
+      <h1><img class="logo" src="assets/logo.png" alt="EzannStudios — HTML5 arcade games" width="900" height="240" /></h1>
       <p class="tagline">An independent studio making fast, fun HTML5 arcade games for the web — instant to play in any browser, on any device.</p>
     </header>
 
@@ -140,60 +38,78 @@
         <p>EzannStudios is an independent game studio focused on lightweight HTML5 arcade and casual games. We build tight, one-more-try experiences — easy to pick up, hard to put down — with clean visuals, responsive one-touch controls, and instant browser play across desktop and mobile. New titles are released regularly across web gaming portals.</p>
       </section>
 
-      <section>
+      <section id="games">
         <h2>Games</h2>
         <div class="games">
           <article class="card">
-            <div class="thumb"><img src="assets/delivery-drift.jpg" alt="Delivery Drift cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="delivery-drift/"><img src="assets/delivery-drift.jpg" alt="Delivery Drift cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Delivery Drift</h3>
-              <p>A one-touch arcade drive where your cargo is your life — drift a delivery van from desert to neon city as day turns to night, and don't lose the last package.</p>
-              <a class="play" href="https://playgama.ai/play/jhdlvwv6o4" target="_blank" rel="noopener">Play on Playgama →</a>
+              <h3><a href="delivery-drift/">Delivery Drift</a></h3>
+              <p>A one-touch arcade drive where your cargo is your life — drift a delivery van from desert to neon city as day turns to night, and don&#x27;t lose the last package.</p>
+              <div class="actions">
+                <a class="play" href="https://playgama.ai/play/jhdlvwv6o4" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="delivery-drift/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
 
           <article class="card">
-            <div class="thumb"><img src="assets/liquid-cats.jpg" alt="Liquid Cats cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="liquid-cats/"><img src="assets/liquid-cats.jpg" alt="Liquid Cats cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Liquid Cats</h3>
+              <h3><a href="liquid-cats/">Liquid Cats</a></h3>
               <p>A cozy maze puzzle where cats are liquid — turn the maze, pour squishy cats into boxes they fit exactly, and keep different breeds apart.</p>
-              <a class="play" href="https://playgama.ai/play/6duereti2h" target="_blank" rel="noopener">Play on Playgama →</a>
+              <div class="actions">
+                <a class="play" href="https://playgama.ai/play/6duereti2h" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="liquid-cats/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
 
           <article class="card">
-            <div class="thumb"><img src="assets/moonbrew-apothecary.jpg" alt="Moonbrew Apothecary cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="moonbrew-apothecary/"><img src="assets/moonbrew-apothecary.jpg" alt="Moonbrew Apothecary cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Moonbrew Apothecary</h3>
+              <h3><a href="moonbrew-apothecary/">Moonbrew Apothecary</a></h3>
               <p>A cozy Halloween potion shop — brew for spooky-sweet customers and cross the Veil to gather glowing spirit flowers.</p>
-              <a class="play" href="https://playgama.ai/play/h7rsoeyvfn" target="_blank" rel="noopener">Play on Playgama →</a>
+              <div class="actions">
+                <a class="play" href="https://playgama.ai/play/h7rsoeyvfn" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="moonbrew-apothecary/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
 
           <article class="card">
-            <div class="thumb"><img src="assets/magnetic-neon.jpg" alt="Magnetic Neon cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="magnetic-neon/"><img src="assets/magnetic-neon.jpg" alt="Magnetic Neon cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Magnetic Neon</h3>
+              <h3><a href="magnetic-neon/">Magnetic Neon</a></h3>
               <p>An endless synthwave runner — flip your magnetic charge to weave through a neon gauntlet of hazards.</p>
-              <a class="play" href="https://playgama.com/game/magnetic-neon?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+              <div class="actions">
+                <a class="play" href="https://playgama.com/game/magnetic-neon?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="magnetic-neon/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
 
           <article class="card">
-            <div class="thumb"><img src="assets/cutback.jpg" alt="Cutback cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="cutback/"><img src="assets/cutback.jpg" alt="Cutback cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Cutback</h3>
+              <h3><a href="cutback/">Cutback</a></h3>
               <p>A stack-and-balance challenge — swipe to slice the top block clean and keep your tower from toppling.</p>
-              <a class="play" href="https://playgama.com/game/cutback?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+              <div class="actions">
+                <a class="play" href="https://playgama.com/game/cutback?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="cutback/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
 
           <article class="card">
-            <div class="thumb"><img src="assets/orbit-dodge.jpg" alt="Orbit Dodge cover art" width="1360" height="850" loading="lazy" /></div>
+            <a class="thumb" href="orbit-dodge/"><img src="assets/orbit-dodge.jpg" alt="Orbit Dodge cover art" width="1360" height="850" loading="lazy" /></a>
             <div class="card-body">
-              <h3>Orbit Dodge</h3>
+              <h3><a href="orbit-dodge/">Orbit Dodge</a></h3>
               <p>A one-touch orbit dodger — time your release to slingshot the gap and thread past everything in your path.</p>
-              <a class="play" href="https://playgama.com/game/orbit-dodge?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+              <div class="actions">
+                <a class="play" href="https://playgama.com/game/orbit-dodge?clid=p_86062e56-72cf-4a58-b19b-1f9aac66ab14" target="_blank" rel="noopener">Play on Playgama →</a>
+                <a class="more-link" href="orbit-dodge/">How to play &amp; more</a>
+              </div>
             </div>
           </article>
         </div>
