@@ -110,6 +110,21 @@ h2 {
 .play:hover { filter: brightness(1.12); }
 .play.big { font-size: 18px; padding: 14px 28px; }
 
+/* Guide (home, after the games): one wide card, image left, text right; stacks on phones */
+.guide-card { display: grid; grid-template-columns: 1fr 1fr; }
+.guide-card .thumb { aspect-ratio: 4 / 3; height: 100%; border-bottom: 0; border-right: 1px solid var(--line); }
+.guide-card .card-body { padding: 24px 24px 26px; justify-content: center; }
+.guide-card .card-body h3 { font-size: 22px; line-height: 1.3; margin-bottom: 10px; }
+.guide-card .card-body p { flex: 0 0 auto; }
+.guide-card .price { color: var(--text); font-weight: 700; margin: 0 0 14px; font-size: 15px; }
+.guide-card .free-link { margin: 14px 0 0; font-size: 14px; }
+.guide-card .free-link a { text-decoration: none; font-weight: 600; }
+.guide-card .free-link a:hover { text-decoration: underline; }
+@media (max-width: 700px) {
+  .guide-card { grid-template-columns: 1fr; }
+  .guide-card .thumb { height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
 /* Game page */
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0 6px; }
 .topbar .home-logo img { display: block; width: 150px; height: auto; }
@@ -172,7 +187,8 @@ h2 {
 .shots img { display: block; width: 100%; height: auto; }
 .more-games {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  /* auto-fit + 140 px min: the five other games fill one row on desktop, 2 per row on phones */
+  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
   gap: 16px;
 }
 .mini {
@@ -186,7 +202,9 @@ h2 {
   transition: transform .18s ease, border-color .18s ease;
 }
 .mini:hover { transform: translateY(-3px); border-color: #46466f; }
-.mini img { display: block; width: 100%; aspect-ratio: 136 / 85; object-fit: cover; }
+/* height:auto matters: the img's height="850" attribute would otherwise beat aspect-ratio
+   and stretch each cover into a tall, badly cropped strip */
+.mini img { display: block; width: 100%; height: auto; aspect-ratio: 136 / 85; object-fit: cover; }
 .mini span { display: block; padding: 10px 12px 12px; font-weight: 600; font-size: 15px; }
 
 footer {
